@@ -11,13 +11,13 @@ export async function invitationImage(name: string) {
         display: "flex",
         width: "100%",
         height: "100%",
-        background: "#14100E",
-        color: "#EDE4D3",
+        background: "#FBF8F1",
+        color: "#2E2A22",
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
         padding: 65,
-        border: "16px solid #C9A227",
+        border: "16px solid #5C7A5E",
         fontFamily: "Vietnam",
       }}
     >
@@ -25,7 +25,7 @@ export async function invitationImage(name: string) {
       <div
         style={{
           display: "flex",
-          color: "#C9A227",
+          color: "#5C7A5E",
           fontSize: 104,
           marginTop: 40,
         }}

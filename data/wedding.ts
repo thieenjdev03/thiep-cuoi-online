@@ -38,7 +38,7 @@ export const wedding = {
     groom: {
       bank: "Vietcombank",
       account: "",
-      holder: "NGUYEN VAN MINH",
+      holder: "NGUYEN HUU THANG",
       qr: "",
     },
     bride: {

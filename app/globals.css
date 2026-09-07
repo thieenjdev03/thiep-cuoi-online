@@ -1,21 +1,23 @@
 @import "tailwindcss";
 @theme inline {
-  --color-ground: #14100e;
-  --color-ground-2: #1f1815;
-  --color-gold: #c9a227;
-  --color-vermilion: #9b2d20;
-  --color-paper: #ede4d3;
-  --color-muted: #b2a392;
+  --color-ground: #fbf8f1;
+  --color-ground-2: #f1ede0;
+  --color-gold: #5c7a5e;
+  --color-vermilion: #4a6350;
+  --color-paper: #2e2a22;
+  --color-muted: #8a8270;
   --font-body: var(--font-sans);
   --font-display: var(--font-serif);
 }
 :root {
-  --ground: #14100e;
-  --ground-2: #1f1815;
-  --gold: #c9a227;
-  --paper: #ede4d3;
-  --muted: #b2a392;
-  --line: rgba(201, 162, 39, 0.23);
+  --ground: #fbf8f1;
+  --ground-2: #f1ede0;
+  --gold: #5c7a5e;
+  --vermilion: #4a6350;
+  --paper: #2e2a22;
+  --muted: #8a8270;
+  --line: rgba(92, 122, 94, 0.22);
+  --hero-ground: #24352a;
 }
 * {
   box-sizing: border-box;
@@ -167,7 +169,7 @@ section {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: #343128;
+  background: var(--hero-ground);
 }
 .hero-photo {
   object-fit: cover;
@@ -178,10 +180,10 @@ section {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(13, 16, 12, 0.43),
-    rgba(13, 16, 12, 0.16) 35%,
-    rgba(20, 16, 14, 0.64) 80%,
-    #14100e
+    rgba(18, 28, 19, 0.45),
+    rgba(18, 28, 19, 0.16) 35%,
+    rgba(20, 32, 22, 0.66) 80%,
+    var(--hero-ground)
   );
 }
 .hero-content {
@@ -216,7 +218,7 @@ section {
 }
 .hero h1 span {
   font-style: italic;
-  color: #dcc68d;
+  color: #bfd4b4;
   font-size: 0.71em;
 }
 .hero-date {
@@ -231,7 +233,7 @@ section {
 .hero-date i {
   font-size: 19px;
   font-style: normal;
-  color: #c6b997;
+  color: #a9c29c;
 }
 .hero-location {
   font-size: 12px;
@@ -242,10 +244,10 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 24px;
-  border: 1px solid #dfd2b983;
+  border: 1px solid #cfe0c583;
   padding: 13px 25px;
   margin-top: 32px;
-  background: #14100e25;
+  background: #1a2a1830;
   font-size: 12px;
 }
 .hero-bottom {
@@ -257,7 +259,7 @@ section {
   justify-content: space-between;
   align-items: center;
   font-size: 10px;
-  color: #c1b7a6;
+  color: #b7c4ac;
 }
 .hero-bottom > a {
   display: flex;
@@ -446,7 +448,7 @@ section {
 .lightbox {
   position: fixed;
   inset: 0;
-  background: #14100efa;
+  background: #fbf8f1fa;
   color: var(--paper);
   border: 1px solid var(--line);
   width: min(1100px, 96vw);
@@ -455,7 +457,7 @@ section {
   max-height: 95dvh;
 }
 .lightbox::backdrop {
-  background: #000d;
+  background: rgba(20, 26, 20, 0.75);
 }
 .lightbox-image {
   height: 73dvh;
@@ -500,7 +502,7 @@ section {
 .event {
   padding: 43px 22px;
   border: 1px solid var(--line);
-  background: linear-gradient(145deg, #241c1680, transparent);
+  background: linear-gradient(145deg, #ffffff90, transparent);
   position: relative;
 }
 .event > svg {
@@ -657,7 +659,7 @@ section {
   gap: 8px;
   flex: 1;
   padding: 13px 10px;
-  border: 1px solid #645245;
+  border: 1px solid #c7d3be;
   cursor: pointer;
   font-size: 11px;
 }
@@ -685,9 +687,9 @@ section {
   display: block;
   width: 100%;
   margin-top: 9px;
-  background: #14100e;
+  background: #ffffff;
   color: var(--paper);
-  border: 1px solid #645245;
+  border: 1px solid #c7d3be;
   border-radius: 0;
   padding: 13px 15px;
   resize: vertical;
@@ -695,14 +697,14 @@ section {
 }
 .field input::placeholder,
 .field textarea::placeholder {
-  color: #a49583;
+  color: #9ca893;
 }
 .rsvp-submit {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 18px;
-  background: #9b2d20;
+  background: var(--vermilion);
   border: 0;
   width: 100%;
   padding: 15px;
@@ -719,7 +721,7 @@ section {
   margin-top: 15px;
 }
 .form-error {
-  color: #f2d4a0;
+  color: #b5573f;
   font-size: 12px;
   margin-top: 15px;
 }
@@ -790,9 +792,10 @@ footer p {
   background: var(--ground);
 }
 .music-button {
-  border: 1px solid #bba56875;
+  border: 1px solid rgba(92, 122, 94, 0.35);
   border-radius: 30px;
-  background: #1f1815ed;
+  background: #fbf8f1ee;
+  color: var(--paper);
   display: flex;
   align-items: center;
   gap: 8px;

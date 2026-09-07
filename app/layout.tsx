@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "Trân trọng mời bạn cùng chung vui trong ngày cưới của Minh & Ngọc, 20.12.2026.",
   robots: { index: false, follow: false },
 };
-export const viewport: Viewport = { themeColor: "#14100E" };
+export const viewport: Viewport = { themeColor: "#24352A" };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
