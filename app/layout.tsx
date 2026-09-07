@@ -18,9 +18,9 @@ export const metadata: Metadata = {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000"),
   ),
-  title: "Minh & Ngọc — Mình cưới nhé",
+  title: "Thắng & Thương — Mình cưới nhé",
   description:
-    "Trân trọng mời bạn cùng chung vui trong ngày cưới của Minh & Ngọc, 20.12.2026.",
+    "Trân trọng mời bạn cùng chung vui trong ngày cưới của Thắng & Thương, 20.12.2026.",
   robots: { index: false, follow: false },
 };
 export const viewport: Viewport = { themeColor: "#24352A" };

@@ -171,7 +171,7 @@ export default function Invitation({ guest }: { guest: Guest }) {
             <br />
             và những kỷ niệm thật đẹp.
           </p>
-          <div className="signature">Minh & Ngọc</div>
+          <div className="signature">Thắng & Thương</div>
           <span>20.12.2026</span>
         </section>
       </main>

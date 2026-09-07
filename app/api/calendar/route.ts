@@ -20,7 +20,7 @@ export function GET(request: Request) {
     `DTSTAMP:20260907T000000Z`,
     `DTSTART:${event.calendarStart}`,
     `DTEND:${event.calendarEnd}`,
-    `SUMMARY:${escape(`Đám cưới Minh & Ngọc — ${event.title}`)}`,
+    `SUMMARY:${escape(`Đám cưới Thắng & Thương — ${event.title}`)}`,
     `LOCATION:${escape(`${event.venue}, ${event.address}`)}`,
     "END:VEVENT",
     "END:VCALENDAR",

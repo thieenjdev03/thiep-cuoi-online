@@ -1,4 +1,4 @@
-# Thiệp cưới Minh & Ngọc
+# Thiệp cưới Thắng & Thương
 
 Next.js App Router, TypeScript, Tailwind v4; ảnh WebP lưu cục bộ, font Lora và Be Vietnam Pro có đầy đủ dấu, GSAP chỉ tải khi gần phần câu chuyện trên desktop. Native scroll, tắt motion theo thiết lập hệ thống. Nhạc mặc định tắt; bản giai điệu mẫu tổng hợp cục bộ, không tải âm thanh bên thứ ba.
 

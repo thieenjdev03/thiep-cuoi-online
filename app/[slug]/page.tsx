@@ -11,8 +11,8 @@ export async function generateMetadata({
 }) {
   const guest = getGuest((await params).slug);
   return {
-    title: `Thân mời ${guest.name} — Minh & Ngọc`,
-    description: `Mời ${guest.name} chung vui cùng Minh & Ngọc ngày 20.12.2026.`,
+    title: `Thân mời ${guest.name} — Thắng & Thương`,
+    description: `Mời ${guest.name} chung vui cùng Thắng & Thương ngày 20.12.2026.`,
   };
 }
 export default async function Page({

@@ -30,7 +30,7 @@ export async function invitationImage(name: string) {
           marginTop: 40,
         }}
       >
-        Minh & Ngọc
+        Thắng & Thương
       </div>
       <div style={{ display: "flex", fontSize: 30, marginTop: 38 }}>
         20.12.2026 · Mình cưới nhé
