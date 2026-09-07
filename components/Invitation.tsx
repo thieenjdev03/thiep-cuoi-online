@@ -42,7 +42,7 @@ export default function Invitation({ guest }: { guest: Guest }) {
             </p>
             <p className="hero-note">Đến với ngày chúng mình thành đôi</p>
             <h1 id="couple-names">
-              Minh <span>&</span> Ngọc
+              Thắng <span>&</span> Thương
             </h1>
             <div className="hero-date">
               <span>20</span>
