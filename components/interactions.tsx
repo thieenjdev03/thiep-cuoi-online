@@ -41,7 +41,7 @@ export function Countdown() {
           seconds % 60,
         ];
   return (
-    <div className="countdown-wrap">
+    <div className="countdown-wrap" data-reveal>
       <p>
         {seconds === 0
           ? "Ngày hạnh phúc đã đến"
@@ -50,7 +50,7 @@ export function Countdown() {
       <div className="countdown" aria-label="Đếm ngược đến ngày cưới">
         {values.map((v, i) => (
           <div key={i}>
-            <span>{String(v).padStart(2, "0")}</span>
+            <span key={v}>{String(v).padStart(2, "0")}</span>
             <small>{["Ngày", "Giờ", "Phút", "Giây"][i]}</small>
           </div>
         ))}
@@ -78,6 +78,7 @@ export function Gallery() {
           <button
             key={photo.src}
             className={`gallery-photo photo-${i}`}
+            data-reveal="photo"
             onClick={() => {
               setSelected(i);
               dialog.current?.showModal();
@@ -174,9 +175,9 @@ export function Gift({ preferredSide }: { preferredSide: EventSide }) {
   }
   return (
     <section className="section gift">
-      <GiftIcon size={32} strokeWidth={1} />
-      <h2>Một chút tâm tình</h2>
-      <p>
+      <GiftIcon size={32} strokeWidth={1} data-reveal />
+      <h2 data-reveal>Một chút tâm tình</h2>
+      <p data-reveal>
         Đến chung vui là đủ đầy. Nếu muốn gửi thêm lời chúc bằng một món quà
         nhỏ,
         <br className="desktop-break" /> chúng mình xin nhận với tất cả sự trân
@@ -187,6 +188,7 @@ export function Gift({ preferredSide }: { preferredSide: EventSide }) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="gift-details"
+        data-reveal
       >
         {open ? "Khép hộp mừng cưới" : "Mở hộp mừng cưới"}
         <Heart size={16} />
@@ -309,7 +311,7 @@ export function Rsvp({ guest }: { guest: Guest }) {
   }
   return (
     <section id="rsvp" className="section rsvp">
-      <div className="rsvp-copy">
+      <div className="rsvp-copy" data-reveal>
         <p className="section-label">Một lời hẹn, một niềm vui</p>
         <h2>
           Hôm ấy,
@@ -324,7 +326,7 @@ export function Rsvp({ guest }: { guest: Guest }) {
         <span>Thương mời {guest.name}</span>
       </div>
       {state === "done" ? (
-        <div className="rsvp-success" role="status">
+        <div className="rsvp-success" role="status" data-reveal>
           <Check size={34} />
           <h3>
             {attending
@@ -341,7 +343,7 @@ export function Rsvp({ guest }: { guest: Guest }) {
           </button>
         </div>
       ) : (
-        <form onSubmit={submit} className="rsvp-form">
+        <form onSubmit={submit} className="rsvp-form" data-reveal>
           <fieldset disabled={state === "sending"}>
             <legend>Bạn sẽ đến chung vui chứ?</legend>
             <div className="attendance-options">
@@ -457,7 +459,7 @@ export function Music() {
     }
   }
   return (
-    <div className="music-control">
+    <div className="music-control" data-reveal>
       <span role="status">{error}</span>
       <button
         className="music-button"

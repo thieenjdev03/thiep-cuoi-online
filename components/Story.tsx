@@ -68,13 +68,15 @@ export default function Story() {
   return (
     <section ref={root} id="cau-chuyen" className="section story">
       <div className="story-visual">
-        <p className="section-label">Chuyện của chúng mình</p>
-        <h2>
+        <p className="section-label" data-reveal>
+          Chuyện của chúng mình
+        </p>
+        <h2 data-reveal>
           Từ một lần gặp,
           <br />
           đến một đời thương.
         </h2>
-        <div className="story-image">
+        <div className="story-image" data-reveal="photo">
           <Image
             src="/images/gallery-1.webp"
             alt="Không gian lễ cưới trang trí hoa trong khu vườn"
@@ -82,14 +84,14 @@ export default function Story() {
             sizes="(max-width: 767px) 90vw, 40vw"
           />
         </div>
-        <p className="photo-caption">
+        <p className="photo-caption" data-reveal>
           Có những điều tình cờ, hóa ra là định mệnh.
         </p>
       </div>
       <div className="timeline">
         <div className="story-line" />
         {wedding.story.map((item) => (
-          <article key={item.year}>
+          <article key={item.year} data-reveal>
             <span className="timeline-dot" />
             <p className="story-year">{item.year}</p>
             <h3>{item.title}</h3>
