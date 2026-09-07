@@ -1,12 +1,12 @@
 export const wedding = {
   groom: {
-    name: "Minh",
+    name: "Thắng",
     fullName: "Nguyễn Hữu Thắng",
-    parents: ["Ông Nguyễn Văn An", "Bà Trần Thị Mai"],
+    parents: ["Ông Nguyễn Văn Hưng", "Bà Trần Ngọc Nữ"],
   },
   bride: {
-    name: "Ngọc",
-    fullName: "Trần Thị Ngọc",
+    name: "Thương",
+    fullName: "Trần Ngọc Hoài Thương",
     parents: ["Ông Trần Văn Hùng", "Bà Lê Thị Hương"],
   },
   date: "2026-12-20T11:00:00+07:00",
