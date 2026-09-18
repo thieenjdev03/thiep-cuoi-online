@@ -1,0 +1,40 @@
+.page { min-height: 100dvh; background: #f8f5ef; color: #3f332e; }
+.header { height: 76px; margin: 0 5%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ddd5c9; }
+.header a { display: flex; align-items: center; gap: 10px; }
+.header > span { font-size: 10px; letter-spacing: 2px; color: #756257; }
+.workspace { max-width: 1320px; margin: auto; display: grid; grid-template-columns: 390px minmax(0, 1fr); gap: 90px; padding: 48px 48px 64px; }
+.eyebrow { font-size: 10px; letter-spacing: 2px; color: #9a483d; }
+.controls h1 { font-size: clamp(40px, 4vw, 55px); line-height: 1.2; letter-spacing: -2px; margin: 17px 0; }
+.controls h1 em { color: #a44238; font-weight: 400; }
+.controls > p { font-size: 13px; line-height: 1.9; color: #76685f; max-width: 350px; }
+.form { margin-top: 27px; }
+.upload { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 20px; border: 1px dashed #b89e88; background: #fffcf7; cursor: pointer; }
+.upload svg { color: #a44238; margin-bottom: 4px; }
+.upload strong { font-size: 13px; font-weight: 500; }
+.upload span { font-size: 10px; color: #79695b; }
+.upload input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
+.upload:focus-within { outline: 2px solid #a44238; outline-offset: 3px; }
+.filename { display: block; color: #79695b; font-size: 10px; margin-top: 6px; overflow-wrap: anywhere; }
+.fields { display: grid; grid-template-columns: 1fr; gap: 13px; margin: 20px 0; }
+.fields label { font-size: 11px; }
+.fields input, .fields select { display: block; margin-top: 5px; width: 100%; padding: 10px 12px; border: 1px solid #d7cbbe; background: #fffdf9; border-radius: 3px; color: #48372d; font-size: 13px; }
+.adjust { border: 0; border-top: 1px solid #ddd5c9; padding: 12px 0 0; margin: 0; }
+.adjust legend { padding-right: 12px; font-size: 11px; }
+.adjust label { display: grid; grid-template-columns: 88px 1fr; align-items: center; font-size: 11px; margin: 5px 0; }
+.adjust input { width: 100%; accent-color: #a44238; min-height: 28px; }
+.reset { display: flex; align-items: center; gap: 6px; font-size: 10px; min-height: 36px; background: transparent; border: 0; padding: 0; color: #785547; }
+.download { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border: 0; border-radius: 3px; padding: 15px; margin-top: 17px; background: #943e34; color: #fff8ef; font-size: 13px; }
+.download:disabled { opacity: .5; cursor: wait; }
+.note { text-align: center; font-size: 10px; line-height: 1.8; color: #78695e; margin-top: 12px; }
+.error { color: #a32926; font-size: 12px; margin-top: 12px; }
+.preview { min-width: 0; background: #eae7df; padding: 22px 35px 18px; align-self: start; }
+.previewHeading { display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 1.5px; color: #706e63; gap: 10px; margin-bottom: 28px; }
+.scroll { margin: auto; max-width: 445px; filter: drop-shadow(0 10px 13px #52402c25); }
+.scroll canvas { width: calc(100% - 22px); height: auto; display: block; margin: auto; aspect-ratio: 2 / 3; background: #fff5ef; }
+.rod { position: relative; height: 13px; border-radius: 3px; background: linear-gradient(#a08134, #f9e6a2 35%, #d6b25d 70%, #846322); }
+.rod::before, .rod::after { content: ''; position: absolute; top: -2px; width: 15px; height: 17px; border-radius: 3px; background: linear-gradient(#374344, #111a1c); }
+.rod::before { left: 0; } .rod::after { right: 0; }
+.preview > p { font-size: 10px; text-align: center; color: #706e63; margin-top: 20px; }
+@media (min-width: 1100px) { .preview { position: sticky; top: 24px; } }
+@media (max-width: 1000px) { .workspace { grid-template-columns: 320px minmax(0, 1fr); gap: 32px; padding: 30px 24px; } .preview { padding: 20px 16px; } }
+@media (max-width: 720px) { .header { height: 62px; } .header > span { font-size: 8px; letter-spacing: 1px; } .workspace { grid-template-columns: 1fr; padding: 28px 20px; gap: 30px; } .controls h1 { font-size: 43px; } .controls > p { max-width: none; } .fields input, .fields select { font-size: 16px; } .preview { padding: 20px; } }

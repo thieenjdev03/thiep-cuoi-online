@@ -37,3 +37,9 @@ Kiểm tra 4 slug mẫu ở 320/390/430px và `/abcxyz`; tên dài, thứ tự t
 ## Ảnh mẫu
 
 Ảnh từ Unsplash, tải và lưu cục bộ để không phụ thuộc bên thứ ba lúc chạy. Các ID nguồn: `1519741497674-611481863552`, `1523438885200-e635ba2c371e`, `1591604466107-ec97de577aff`, `1529636798458-92182e662485`, `1511285560929-80b456fea0bc`, `1511795409834-ef04bbd61622`. Nguồn: https://unsplash.com/s/photos/wedding . Font từ https://github.com/google/fonts (SIL Open Font License).
+
+## Lịch Tết cá nhân
+
+Trang riêng `/lich-tet`: chọn ảnh JPG/PNG/WebP tối đa 25 MB, căn vị trí và phóng to, chọn năm 1900–2100, sửa lời chúc rồi tải PNG 3600×5400 px (tỉ lệ 2:3). Ảnh được xử lý bằng Canvas trên thiết bị, không gửi lên server; tải lại trang sẽ đặt lại bản chỉnh sửa. Lịch dương 12 tháng, Chủ nhật màu đỏ; chưa có ngày âm. Thanh treo chỉ hiển thị trong bản xem trước. Hoa đào là hình vector vẽ bằng Canvas, bố cục lấy cảm hứng từ lịch treo ảnh.
+
+Kiểm tra ngày/thứ và năm nhuận: `npx tsx scripts/test-calendar.ts`. Kiểm tra thủ công: thay ảnh dọc/ngang, chỉnh ba thanh trượt, chọn 2028, nhập lời chúc tiếng Việt, tải PNG và mở ảnh kiểm tra kích thước; xem ở 390px và desktop.
