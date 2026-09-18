@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { monthDays, photoRects, cropRect, WIDTH, HEIGHT, PRINT_MM } from '../app/lich-tet/calendar';
+import { monthDays, photoRects, cropRect, withPrintDpi, WIDTH, HEIGHT, PRINT_MM, EXPORT_DPI, exportScale } from '../app/lich-tet/calendar';
 // Khổ in 300 × 424 mm: tỉ lệ canvas phải khớp trong vòng nửa pixel.
 assert.ok(Math.abs(WIDTH / HEIGHT - PRINT_MM.width / PRINT_MM.height) * HEIGHT < .5);
 for (const year of [1900, 2000, 2026, 2028, 2100]) {
@@ -44,3 +44,18 @@ for (const concept of ['tet', 'wedding', 'vintage'] as const) {
 }
 }
 console.log('Photo layout checks passed: 1/4/6 images, no overlaps, landscape/portrait crops.');
+
+// PNG phải khai đúng 300 DPI, nếu không nhà in đọc thành 72 DPI và báo ảnh vỡ.
+for (const [units, mm] of [[WIDTH, PRINT_MM.width], [HEIGHT, PRINT_MM.height]] as const) {
+  assert.ok(Math.abs(Math.round(units * exportScale) - mm / 25.4 * EXPORT_DPI) <= 1);
+}
+const fakePng = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82, ...Array(17).fill(0), 1, 2, 3]);
+const tagged = withPrintDpi(fakePng.buffer as ArrayBuffer);
+assert.equal(tagged.length, fakePng.length + 21);
+assert.equal(String.fromCharCode(...tagged.subarray(37, 41)), 'pHYs');
+assert.equal(new DataView(tagged.buffer, tagged.byteOffset).getUint32(41), 11811); // 300 DPI theo mét
+assert.equal(tagged[49], 1);
+assert.deepEqual([...tagged.subarray(0, 33)], [...fakePng.subarray(0, 33)]);
+assert.deepEqual([...tagged.subarray(54)], [...fakePng.subarray(33)]);
+assert.equal(withPrintDpi(new Uint8Array(40).buffer as ArrayBuffer).length, 40); // không phải PNG thì giữ nguyên
+console.log('Print checks passed: 300 DPI canvas size, pHYs chunk inserted after IHDR.');

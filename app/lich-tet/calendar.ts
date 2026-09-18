@@ -5,10 +5,42 @@ export function monthDays(year: number, month: number) {
   return Array.from({ length: 42 }, (_, i) => i >= offset && i < offset + count ? i - offset + 1 : null);
 }
 
-// Khổ in 300 × 424 mm. Xuất ở scale 2 = 3820 × 5400 px (~323 DPI).
+// Khổ in 300 × 424 mm ở 300 DPI = 3543 × 5008 px.
 export const PRINT_MM = { width: 300, height: 424 };
+export const EXPORT_DPI = 300;
 export const HEIGHT = 2700;
-export const WIDTH = Math.round(HEIGHT * PRINT_MM.width / PRINT_MM.height);
+export const WIDTH = HEIGHT * PRINT_MM.width / PRINT_MM.height; // 1910.38 — giữ số lẻ để tỉ lệ khớp khổ in tuyệt đối
+export const exportScale = PRINT_MM.width / 25.4 * EXPORT_DPI / WIDTH;
+
+// Canvas xuất PNG không kèm pHYs nên nhà in đọc thành 72 DPI; chèn chunk để file khai đúng khổ in.
+const crcTable = Uint32Array.from({ length: 256 }, (_, n) => {
+  let c = n;
+  for (let bit = 0; bit < 8; bit++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+  return c >>> 0;
+});
+function crc32(bytes: Uint8Array) {
+  let c = 0xffffffff;
+  for (const byte of bytes) c = crcTable[(c ^ byte) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+}
+export function withPrintDpi(png: ArrayBuffer, dpi = EXPORT_DPI) {
+  const source = new Uint8Array(png);
+  const header = 33; // 8 byte chữ ký + chunk IHDR (25 byte)
+  if (String.fromCharCode(...source.subarray(12, 16)) !== 'IHDR') return source;
+  const chunk = new Uint8Array(21);
+  const view = new DataView(chunk.buffer);
+  view.setUint32(0, 9);
+  chunk.set([0x70, 0x48, 0x59, 0x73], 4); // 'pHYs'
+  const perMetre = Math.round(dpi / 0.0254);
+  view.setUint32(8, perMetre); view.setUint32(12, perMetre);
+  chunk[16] = 1; // đơn vị: mét
+  view.setUint32(17, crc32(chunk.subarray(4, 17)));
+  const out = new Uint8Array(source.length + chunk.length);
+  out.set(source.subarray(0, header));
+  out.set(chunk, header);
+  out.set(source.subarray(header), header + chunk.length);
+  return out;
+}
 export type Concept = 'tet' | 'wedding' | 'vintage';
 export type PhotoCount = 1 | 4 | 6;
 export type Crop = { zoom: number; x: number; y: number };
@@ -39,8 +71,8 @@ export function cropRect(imageWidth: number, imageHeight: number, width: number,
 }
 
 export function drawCalendar(canvas: HTMLCanvasElement, photos: Photo[], options: Options, scale = 1) {
-  canvas.width = WIDTH * scale;
-  canvas.height = HEIGHT * scale;
+  canvas.width = Math.round(WIDTH * scale);
+  canvas.height = Math.round(HEIGHT * scale);
   const context = canvas.getContext('2d');
   if (!context) throw new Error('Trình duyệt không hỗ trợ Canvas');
   const ctx = context;

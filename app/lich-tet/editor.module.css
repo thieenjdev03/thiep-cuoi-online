@@ -27,6 +27,7 @@
 .download:disabled { opacity: .5; cursor: wait; }
 .note { text-align: center; font-size: 10px; line-height: 1.8; color: #78695e; margin-top: 12px; }
 .error { color: #a32926; font-size: 12px; margin-top: 12px; }
+.lowDpi { color: #a32926; }
 .preview { min-width: 0; background: #eae7df; padding: 22px 35px 18px; align-self: start; }
 .previewHeading { display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 1.5px; color: #706e63; gap: 10px; margin-bottom: 28px; }
 .scroll { margin: auto; max-width: 445px; filter: drop-shadow(0 10px 13px #52402c25); }

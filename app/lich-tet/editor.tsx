@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Download, ImagePlus, RotateCcw } from 'lucide-react';
-import { drawCalendar, type Concept, type Crop, type Options, type Photo, type PhotoCount } from './calendar';
+import { cropRect, drawCalendar, exportScale, photoRects, EXPORT_DPI, HEIGHT, WIDTH, withPrintDpi, type Concept, type Crop, type Options, type Photo, type PhotoCount } from './calendar';
 import styles from './editor.module.css';
 
 const centered: Crop = { zoom: 1, x: 50, y: 50 };
@@ -34,6 +34,13 @@ export default function CalendarEditor({ initialConcept = 'tet' }: { initialConc
   const withCalendar = !wedding || options.showCalendar;
   const activePhoto = photos[selected];
   const ready = fontsReady && photos.slice(0, options.count).every(photo => photo.image);
+  // DPI thật của ảnh yếu nhất: dưới 300 là nhà in sẽ thấy mềm, dưới 150 là vỡ hạt.
+  const photoDpi = Math.min(...photoRects(options.count, options.concept, withCalendar).map((rect, index) => {
+    const photo = photos[index];
+    if (!photo?.image) return Infinity;
+    const crop = cropRect(photo.image.naturalWidth, photo.image.naturalHeight, rect.width, rect.height, photo);
+    return EXPORT_DPI * photo.image.naturalWidth / crop.width / exportScale;
+  }));
 
   useEffect(() => {
     let active = true;
@@ -92,9 +99,9 @@ export default function CalendarEditor({ initialConcept = 'tet' }: { initialConc
     setExporting(true); setError('');
     try {
       const output = document.createElement('canvas');
-      drawCalendar(output, photos, options, 2);
+      drawCalendar(output, photos, options, exportScale);
       const blob = await new Promise<Blob>((resolve, reject) => output.toBlob(value => value ? resolve(value) : reject(new Error('export')), 'image/png'));
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(new Blob([withPrintDpi(await blob.arrayBuffer())], { type: 'image/png' }));
       const link = document.createElement('a'); link.href = url; link.download = `${wedding ? `${options.concept === 'vintage' ? 'tram-nam-hanh-phuc' : 'happy-wedding'}${withCalendar ? `-lich-${options.year}` : ''}` : `lich-tet-${options.year}`}-${options.count}-anh.png`;
       document.body.appendChild(link); link.click(); link.remove();
       setDownloadFile({ url, name: link.download });
@@ -142,7 +149,7 @@ export default function CalendarEditor({ initialConcept = 'tet' }: { initialConc
           </div>
           <button className={styles.download} disabled={loading || !ready || exporting} onClick={download}><Download size={18} />{exporting ? 'Đang xuất ảnh…' : withCalendar ? 'Tải lịch PNG' : 'Tải poster PNG'}</button>
           {downloadFile && <a className={styles.savedFile} href={downloadFile.url} download={downloadFile.name}>Lưu PNG vừa tạo nếu tải tự động chưa bắt đầu</a>}
-          <p className={styles.note}>3820 × 5400 px · Khổ in 300 × 424 mm · {withCalendar ? 'Lịch dương' : 'Poster cưới'}<br />Các ô chưa thay dùng ảnh mẫu. Ảnh chỉ xử lý trên thiết bị của bạn. Tải lại trang sẽ đặt lại bản chỉnh sửa.</p>
+          <p className={styles.note}>{Math.round(WIDTH * exportScale)} × {Math.round(HEIGHT * exportScale)} px · Khổ in 300 × 424 mm @ {EXPORT_DPI} DPI · {withCalendar ? 'Lịch dương' : 'Poster cưới'}<br />{Number.isFinite(photoDpi) && <>Ảnh của bạn nét tới <strong className={photoDpi < 250 ? styles.lowDpi : undefined}>~{Math.round(photoDpi)} DPI</strong>{photoDpi < 250 ? ' — nên chọn ảnh gốc lớn hơn hoặc giảm phóng to để in không bị mờ.' : ' — đủ nét để in.'}<br /></>}Các ô chưa thay dùng ảnh mẫu. Ảnh chỉ xử lý trên thiết bị của bạn. Tải lại trang sẽ đặt lại bản chỉnh sửa.</p>
           {error && <p className={styles.error} role="alert">{error}</p>}
         </div>
       </section>
