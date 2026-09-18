@@ -5,8 +5,10 @@ export function monthDays(year: number, month: number) {
   return Array.from({ length: 42 }, (_, i) => i >= offset && i < offset + count ? i - offset + 1 : null);
 }
 
-export const WIDTH = 1800;
+// Khổ in 300 × 424 mm. Xuất ở scale 2 = 3820 × 5400 px (~323 DPI).
+export const PRINT_MM = { width: 300, height: 424 };
 export const HEIGHT = 2700;
+export const WIDTH = Math.round(HEIGHT * PRINT_MM.width / PRINT_MM.height);
 export type Concept = 'tet' | 'wedding' | 'vintage';
 export type PhotoCount = 1 | 4 | 6;
 export type Crop = { zoom: number; x: number; y: number };
@@ -48,7 +50,7 @@ export function drawCalendar(canvas: HTMLCanvasElement, photos: Photo[], options
   const withCalendar = concept === 'tet' || options.showCalendar;
   const serif = 'CalendarSerif, Georgia, serif';
   const sans = 'CalendarSans, sans-serif';
-  const paper = ctx.createRadialGradient(900, 1200, 180, 900, 1200, 1800);
+  const paper = ctx.createRadialGradient(WIDTH / 2, 1200, 180, WIDTH / 2, 1200, 1800);
   paper.addColorStop(0, '#fff9df'); paper.addColorStop(1, '#f3bbcb');
   ctx.fillStyle = vintage ? paper : '#fff5ef';
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
@@ -156,19 +158,20 @@ export function drawCalendar(canvas: HTMLCanvasElement, photos: Photo[], options
     ctx.fillText(caption, WIDTH / 2, 1800, 1400);
   }
 
+  const cell = 52, block = cell * 7, gutter = (WIDTH - block * 4) / 5;
   for (let month = 0; month < 12; month++) {
-    const left = 105 + (month % 4) * 405, top = 1850 + Math.floor(month / 4) * 250;
-    ctx.fillStyle = concept === 'wedding' ? '#88604e' : vintage ? '#a32a43' : '#ac342e'; ctx.beginPath(); ctx.roundRect(left + 61, top, 244, 43, 10); ctx.fill();
-    ctx.font = `25px ${serif}`; ctx.fillStyle = '#fff5df'; ctx.fillText(`THÁNG ${month + 1}`, left + 183, top + 30);
+    const left = gutter + (month % 4) * (block + gutter), top = 1850 + Math.floor(month / 4) * 250;
+    ctx.fillStyle = concept === 'wedding' ? '#88604e' : vintage ? '#a32a43' : '#ac342e'; ctx.beginPath(); ctx.roundRect(left + (block - 244) / 2, top, 244, 43, 10); ctx.fill();
+    ctx.font = `25px ${serif}`; ctx.fillStyle = '#fff5df'; ctx.fillText(`THÁNG ${month + 1}`, left + block / 2, top + 30);
     ctx.font = `16px ${sans}`;
     ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'].forEach((day, col) => {
-      ctx.fillStyle = col === 0 ? '#b33339' : '#624941'; ctx.fillText(day, left + col * 52 + 26, top + 72);
+      ctx.fillStyle = col === 0 ? '#b33339' : '#624941'; ctx.fillText(day, left + col * cell + cell / 2, top + 72);
     });
     ctx.font = `21px ${sans}`;
     monthDays(year, month).forEach((day, index) => {
       if (!day) return;
       ctx.fillStyle = index % 7 === 0 ? '#b33339' : '#342e2b';
-      ctx.fillText(String(day), left + index % 7 * 52 + 26, top + 104 + Math.floor(index / 7) * 25);
+      ctx.fillText(String(day), left + index % 7 * cell + cell / 2, top + 104 + Math.floor(index / 7) * 25);
     });
   }
   ctx.font = `22px ${serif}`; ctx.fillStyle = '#975b4f';

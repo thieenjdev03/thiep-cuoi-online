@@ -40,7 +40,7 @@ Kiểm tra 4 slug mẫu ở 320/390/430px và `/abcxyz`; tên dài, thứ tự t
 
 ## Lịch Tết cá nhân
 
-Trang riêng `/lich-tet`: chọn ảnh JPG/PNG/WebP tối đa 25 MB, căn vị trí và phóng to, chọn năm 1900–2100, sửa lời chúc rồi tải PNG 3600×5400 px (tỉ lệ 2:3). Ảnh được xử lý bằng Canvas trên thiết bị, không gửi lên server; tải lại trang sẽ đặt lại bản chỉnh sửa. Lịch dương 12 tháng, Chủ nhật màu đỏ; chưa có ngày âm. Thanh treo chỉ hiển thị trong bản xem trước. Hoa đào là hình vector vẽ bằng Canvas, bố cục lấy cảm hứng từ lịch treo ảnh.
+Trang riêng `/lich-tet`: chọn ảnh JPG/PNG/WebP tối đa 25 MB, căn vị trí và phóng to, chọn năm 1900–2100, sửa lời chúc rồi tải PNG 3820×5400 px (khổ in 300×424 mm, ~323 DPI). Ảnh được xử lý bằng Canvas trên thiết bị, không gửi lên server; tải lại trang sẽ đặt lại bản chỉnh sửa. Lịch dương 12 tháng, Chủ nhật màu đỏ; chưa có ngày âm. Hoa đào là hình vector vẽ bằng Canvas, bố cục lấy cảm hứng từ lịch treo ảnh.
 
 Kiểm tra ngày/thứ và năm nhuận: `npx tsx scripts/test-calendar.ts`. Kiểm tra thủ công: thay ảnh dọc/ngang, chỉnh ba thanh trượt, chọn 2028, nhập lời chúc tiếng Việt, tải PNG và mở ảnh kiểm tra kích thước; xem ở 390px và desktop.
 
@@ -48,6 +48,6 @@ Kiểm tra ngày/thứ và năm nhuận: `npx tsx scripts/test-calendar.ts`. Ki�
 
 Trang `/happy-wedding` mở sẵn concept poster cưới; cũng có thể chuyển giữa **Happy Wedding** và **Lịch Tết** ngay trong trình chỉnh sửa. Cả hai hỗ trợ 1, 4 hoặc 6 ảnh, chọn nhiều file cùng lúc và thay từng ô riêng. Chọn thumbnail để chỉnh phóng to/vị trí cho đúng ảnh; đổi bố cục không xóa ảnh đã chọn trong phiên. Ô chưa thay giữ ảnh mẫu và được ghi rõ trong trình chỉnh sửa.
 
-Happy Wedding có tên cặp đôi, ngày cưới tùy chọn và lời chúc; mặc định không có lịch, có thể bật lịch 12 tháng bên dưới ảnh. PNG vẫn là 3600×5400 px. Ảnh và bản chỉnh sửa chỉ tồn tại trong phiên trang hiện tại, không lưu lên server. Bài kiểm tra `npx tsx scripts/test-calendar.ts` bao gồm cả vị trí khung 1/4/6 ảnh và crop ảnh ngang/dọc.
+Happy Wedding có tên cặp đôi, ngày cưới tùy chọn và lời chúc; mặc định không có lịch, có thể bật lịch 12 tháng bên dưới ảnh. PNG vẫn là 3820×5400 px (300×424 mm). Ảnh và bản chỉnh sửa chỉ tồn tại trong phiên trang hiện tại, không lưu lên server. Bài kiểm tra `npx tsx scripts/test-calendar.ts` bao gồm cả vị trí khung 1/4/6 ảnh và crop ảnh ngang/dọc.
 
 Mẫu **Trăm năm hạnh phúc** dùng nền hồng kem, hoa hồng và khung vàng phong cách thiệp cưới xưa. Bật **Thêm lịch 12 tháng vào thiết kế** trong một trong hai mẫu cưới để ghép lịch dương cùng ảnh, rồi chọn năm. Bốn ảnh xếp 2×2, sáu ảnh xếp 3×2; khung ảnh tự thu gọn khi có lịch, phần ngày tháng không chồng ảnh. Khi trình duyệt chặn tải tự động, dùng liên kết **Lưu PNG vừa tạo** xuất hiện bên dưới nút tải.

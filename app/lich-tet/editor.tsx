@@ -142,14 +142,14 @@ export default function CalendarEditor({ initialConcept = 'tet' }: { initialConc
           </div>
           <button className={styles.download} disabled={loading || !ready || exporting} onClick={download}><Download size={18} />{exporting ? 'Đang xuất ảnh…' : withCalendar ? 'Tải lịch PNG' : 'Tải poster PNG'}</button>
           {downloadFile && <a className={styles.savedFile} href={downloadFile.url} download={downloadFile.name}>Lưu PNG vừa tạo nếu tải tự động chưa bắt đầu</a>}
-          <p className={styles.note}>3600 × 5400 px · Tỉ lệ 2:3 · {withCalendar ? 'Lịch dương' : 'Poster cưới'}<br />Các ô chưa thay dùng ảnh mẫu. Ảnh chỉ xử lý trên thiết bị của bạn. Tải lại trang sẽ đặt lại bản chỉnh sửa.</p>
+          <p className={styles.note}>3820 × 5400 px · Khổ in 300 × 424 mm · {withCalendar ? 'Lịch dương' : 'Poster cưới'}<br />Các ô chưa thay dùng ảnh mẫu. Ảnh chỉ xử lý trên thiết bị của bạn. Tải lại trang sẽ đặt lại bản chỉnh sửa.</p>
           {error && <p className={styles.error} role="alert">{error}</p>}
         </div>
       </section>
       <section className={styles.preview} aria-label="Xem trước thiết kế">
         <div className={styles.previewHeading}><span>BẢN XEM TRƯỚC</span><span>{wedding ? `${conceptLabels[options.concept].toUpperCase()}${withCalendar ? ' · LỊCH' : ''}` : 'HOA ĐÀO · 12 THÁNG'} · {options.count} ẢNH</span></div>
-        <div className={`${styles.scroll} ${wedding ? styles.poster : ''}`}>{!wedding && <div className={styles.rod} />}<canvas ref={canvas} role="img" aria-label={`${wedding ? `${conceptLabels[options.concept]} — ${options.names}${withCalendar ? ` — Lịch ${options.year}` : ''}` : `Lịch năm ${options.year}`}, ${options.count} ảnh, ${options.caption}`} />{!wedding && <div className={styles.rod} />}</div>
-        <p>{wedding ? 'Chọn từng ô ảnh để căn chỉnh khung hình.' : 'Thanh treo chỉ minh họa, không nằm trong ảnh tải về.'}</p>
+        <div className={styles.scroll}><canvas ref={canvas} role="img" aria-label={`${wedding ? `${conceptLabels[options.concept]} — ${options.names}${withCalendar ? ` — Lịch ${options.year}` : ''}` : `Lịch năm ${options.year}`}, ${options.count} ảnh, ${options.caption}`} /></div>
+        <p>Chọn từng ô ảnh để căn chỉnh khung hình.</p>
       </section>
     </div>
   </main>;
